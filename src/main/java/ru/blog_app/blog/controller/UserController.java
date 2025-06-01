@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.blog_app.blog.dto.RegisterUserRequest;
-import ru.blog_app.blog.dto.UserDtoResponse;
+import ru.blog_app.blog.dto.request.RegisterUserRequest;
+import ru.blog_app.blog.dto.response.UserDtoResponse;
 import ru.blog_app.blog.service.UserService;
 
 @Slf4j
@@ -25,7 +25,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserDtoResponse> register(@RequestBody RegisterUserRequest registerUserRequest) {
-        log.info("Вызов метода register с параметром {}", registerUserRequest);
+        log.info("Вызов метода register с параметром {}", registerUserRequest.getUsername());
         UserDtoResponse response = userService.createUser(registerUserRequest);
         return ResponseEntity.ok(response);
     }

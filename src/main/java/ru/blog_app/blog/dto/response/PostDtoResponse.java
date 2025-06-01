@@ -1,4 +1,4 @@
-package ru.blog_app.blog.dto;
+package ru.blog_app.blog.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
