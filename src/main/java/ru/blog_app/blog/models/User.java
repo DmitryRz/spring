@@ -37,6 +37,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
