@@ -17,23 +17,23 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDtoResponse> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserDtoResponse> getUserById(@PathVariable("id") Long id) {
         log.info("Вызов метода getUserById с параметром {}", id);
         UserDtoResponse response = userService.getUser(id);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDtoResponse> register(@RequestBody RegisterUserRequest registerUserRequest) {
-        log.info("Вызов метода register с параметром {}", registerUserRequest.getUsername());
-        UserDtoResponse response = userService.createUser(registerUserRequest);
+    public ResponseEntity<UserDtoResponse> register(@RequestBody RegisterUserRequest request) {
+        log.info("Вызов метода register с параметром {}", request.getUsername());
+        UserDtoResponse response = userService.createUser(request);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}/put")
-    public ResponseEntity<UserDtoResponse> putUser(@RequestBody UserDtoResponse userDtoResponse, @PathVariable Long id) {
-        log.info("Вызов метода updateUser с параметрами {} и {}", userDtoResponse, id);
-        UserDtoResponse response = userService.putUser(userDtoResponse, id);
+    public ResponseEntity<UserDtoResponse> putUser(@RequestBody RegisterUserRequest request, @PathVariable Long id) {
+        log.info("Вызов метода updateUser с параметрами {} и {}", request, id);
+        UserDtoResponse response = userService.putUser(request, id);
         return ResponseEntity.ok(response);
     }
 

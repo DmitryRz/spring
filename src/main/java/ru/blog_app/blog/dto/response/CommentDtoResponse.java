@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class PostDtoResponse {
+public class CommentDtoResponse {
     private Long id;
-    private String title;
     private String content;
-    private Long userId;
+    private Long authorId;
+    private String authorUsername;
+    private Long postId;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }

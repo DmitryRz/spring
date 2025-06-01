@@ -31,7 +31,7 @@ public interface UserService {
      * @param id идентификатор пользователя
      * @return информация о обновленном пользователе
      */
-    UserDtoResponse putUser(UserDtoResponse request, Long id);
+    UserDtoResponse putUser(RegisterUserRequest request, Long id);
 
     /**
      * Удаляет пользователя по его идентификатору.

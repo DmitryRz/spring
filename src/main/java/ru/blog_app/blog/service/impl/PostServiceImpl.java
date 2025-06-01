@@ -27,11 +27,14 @@ public class PostServiceImpl implements PostService {
         User user = userRepository.findByUsername(currentUsername)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+
+
         Post post = Post.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
                 .user(user)
                 .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
 
         Post savedPost = postRepository.save(post);
@@ -61,6 +64,7 @@ public class PostServiceImpl implements PostService {
 
         post.setTitle(request.getTitle());
         post.setContent(request.getContent());
+        post.setUpdatedAt(LocalDateTime.now());
         Post updatedPost = postRepository.save(post);
 
         return convertToDto(updatedPost);
@@ -87,7 +91,8 @@ public class PostServiceImpl implements PostService {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .userId(post.getUser().getId())
-                .createTime(post.getCreatedAt())
+                .createdAt(post.getCreatedAt())
+                .updatedAt(post.getUpdatedAt())
                 .build();
     }
 }
