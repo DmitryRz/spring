@@ -3,8 +3,10 @@ package ru.blog_app.blog.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import ru.blog_app.blog.dto.PostDtoResponse;
+import ru.blog_app.blog.dto.request.CreatePostRequest;
+import ru.blog_app.blog.dto.response.PostDtoResponse;
 import ru.blog_app.blog.service.PostService;
 
 import java.util.List;
@@ -23,31 +25,31 @@ public class PostController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<PostDtoResponse> createPost(@RequestBody PostDtoResponse postDtoResponse) {
-        log.info("Вызов метода createPost с параметром {}", postDtoResponse);
-        PostDtoResponse response = postService.createPost(postDtoResponse);
-        return ResponseEntity.ok(response);
-    }
-
-    @PutMapping("/{id}/update")
-    public ResponseEntity<PostDtoResponse> updatePost(@RequestBody PostDtoResponse postDtoResponse, @PathVariable Long id) {
-        log.info("Вызов метода updatePost с параметрами {} и {}", postDtoResponse, id);
-        PostDtoResponse response = postService.updatePost(postDtoResponse, id);
-        return ResponseEntity.ok(response);
-    }
-
-    @DeleteMapping("/{id}/delete")
-    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
-        log.info("Вызов метода deletePost с параметром {}", id);
-        postService.deletePost(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @GetMapping("/all")
     public ResponseEntity<List<PostDtoResponse>> getAllPosts() {
         log.info("Вызов метода getAllPosts");
         List<PostDtoResponse> response = postService.getAllPosts();
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<PostDtoResponse> createPost(@RequestBody CreatePostRequest request, Authentication authentication) {
+        log.info("Вызов метода createPost с параметром {}", request);
+        PostDtoResponse response = postService.createPost(request, authentication.getName());
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/{id}/put")
+    public ResponseEntity<PostDtoResponse> updatePost(@RequestBody CreatePostRequest request, @PathVariable Long id, Authentication authentication) {
+        log.info("Вызов метода updatePost с параметрами {} и {}", request, id);
+        PostDtoResponse response = postService.updatePost(request, id, authentication.getName());
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<Void> deletePost(@PathVariable("id") Long id, Authentication authentication) {
+        log.info("Вызов метода deletePost с параметром {}", id);
+        postService.deletePost(id, authentication.getName());
+        return ResponseEntity.noContent().build();
     }
 }

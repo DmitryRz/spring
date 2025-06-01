@@ -1,9 +1,11 @@
 package ru.blog_app.blog.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.blog_app.blog.dto.RegisterUserRequest;
-import ru.blog_app.blog.dto.UserDtoResponse;
+import ru.blog_app.blog.dto.request.RegisterUserRequest;
+import ru.blog_app.blog.dto.response.UserDtoResponse;
+import ru.blog_app.blog.enums.Role;
 import ru.blog_app.blog.exception.UserAlreadyExistsException;
 import ru.blog_app.blog.exception.UserNotFoundException;
 import ru.blog_app.blog.models.User;
@@ -14,6 +16,7 @@ import ru.blog_app.blog.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDtoResponse getUser(Long id) {
@@ -27,17 +30,18 @@ public class UserServiceImpl implements UserService {
     public UserDtoResponse createUser(RegisterUserRequest request) {
         if(!userRepository.existsByUsername(request.getUsername()) &&
                 !userRepository.existsByEmail(request.getEmail())) {
+
             User user = User.builder()
                     .username(request.getUsername())
-                    .password(request.getPassword())
+                    .password(passwordEncoder.encode(request.getPassword())) // Шифруем пароль!
                     .email(request.getEmail())
+                    .role(Role.USER) // Устанавливаем роль по умолчанию
                     .build();
+
             userRepository.save(user);
             return createUserDtoResponse(user);
         }
-        else {
-            throw new UserAlreadyExistsException("User already exists");
-        }
+        throw new UserAlreadyExistsException("User already exists");
     }
 
     @Override
