@@ -10,54 +10,54 @@
 
 ### Бэкенд (Java/Spring) ###
 # Maven
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+backend/target/  
+backend/.mvn/wrapper/maven-wrapper.jar  
+!backend/src/main/**/target/  
+!backend/src/test/**/target/  
 
 # IDE
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+backend/.apt_generated  
+backend/.classpath  
+backend/.factorypath  
+backend/.project  
+backend/.settings  
+backend/.springBeans  
+backend/.sts4-cache  
 
 # NetBeans
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+backend/nbproject/private/  
+backend/nbbuild/  
+backend/dist/  
+backend/nbdist/  
+backend/.nb-gradle/  
+backend/build/  
+!backend/src/main/**/build/  
+!backend/src/test/**/build/  
 
 # Документация
-HELP.md
+backend/HELP.md  
 
 ### Фронтенд (Node.js/React/Vue) ###
 # Зависимости
-/node_modules
-/.pnp
-.pnp.js
+frontend/node_modules/  
+frontend/.pnp  
+frontend/.pnp.js  
 
-# Сборка
-/build
-/dist
+### Фронтенд: Сборка ###  
+frontend/build/  
+frontend/dist/  
 
-# Тесты
-/coverage
+### Фронтенд: Тесты ###  
+frontend/coverage/  
 
-# Файлы окружения
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+### Фронтенд: Окружение ###  
+frontend/.env  
+frontend/.env.local  
+frontend/.env.development.local  
+frontend/.env.test.local  
+frontend/.env.production.local  
 
-# Логи
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+### Фронтенд: Логи ###  
+frontend/npm-debug.log*  
+frontend/yarn-debug.log*  
+frontend/yarn-error.log*  
