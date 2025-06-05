@@ -39,14 +39,14 @@ public class PostController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}/put")
+    @PutMapping("/{id}")
     public ResponseEntity<PostDtoResponse> updatePost(@RequestBody CreatePostRequest request, @PathVariable Long id, Authentication authentication) {
         log.info("Вызов метода updatePost с параметрами {} и {}", request, id);
         PostDtoResponse response = postService.updatePost(request, id, authentication.getName());
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable("id") Long id, Authentication authentication) {
         log.info("Вызов метода deletePost с параметром {}", id);
         postService.deletePost(id, authentication.getName());
