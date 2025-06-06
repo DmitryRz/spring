@@ -31,12 +31,12 @@ public interface UserService {
      * @param id идентификатор пользователя
      * @return информация об обновленном пользователе
      */
-    UserDtoResponse putUser(AuthRequest request, Long id);
+    UserDtoResponse putUser(AuthRequest request, Long id, String currentUsername);
 
     /**
      * Удаляет пользователя по его идентификатору.
      *
      * @param id идентификатор пользователя
      */
-    void deleteUser(Long id);
+    void deleteUser(Long id, String currentUsername);
 }

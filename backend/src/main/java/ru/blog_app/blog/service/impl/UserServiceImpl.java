@@ -12,6 +12,7 @@ import ru.blog_app.blog.models.User;
 import ru.blog_app.blog.repository.UserRepository;
 import ru.blog_app.blog.service.UserService;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
@@ -48,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDtoResponse putUser(AuthRequest request, Long id) {
+    public UserDtoResponse putUser(AuthRequest request, Long id, String currentUsername) {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new UserNotFoundException("User not found")
         );
@@ -60,10 +61,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(Long id, String currentUsername) {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new UserNotFoundException(String.format("Пользователь с id: %d не найден", id))
         );
+        if (!user.getUsername().equals(currentUsername)){
+            throw new RuntimeException("Forbidden");
+        }
         userRepository.delete(user);
     }
 

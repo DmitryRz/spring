@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.blog_app.blog.dto.request.AuthRequest;
+import ru.blog_app.blog.enums.Role;
 import ru.blog_app.blog.models.User;
 import ru.blog_app.blog.repository.UserRepository;
 import ru.blog_app.blog.security.JwtTokenProvider;
@@ -29,6 +30,7 @@ public class AuthServiceImpl implements AuthService {
         user.setEmail(request.getEmail());
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(Role.USER);
         userRepository.save(user);
     }
 
