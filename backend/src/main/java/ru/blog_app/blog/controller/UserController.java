@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.blog_app.blog.dto.request.RegisterUserRequest;
+import ru.blog_app.blog.dto.request.AuthRequest;
 import ru.blog_app.blog.dto.response.UserDtoResponse;
 import ru.blog_app.blog.service.UserService;
 
@@ -23,22 +23,22 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserDtoResponse> register(@RequestBody RegisterUserRequest request) {
+    /*@PostMapping("/register")
+    public ResponseEntity<UserDtoResponse> register(@RequestBody AuthRequest request) {
         log.info("Вызов метода register с параметром {}", request.getUsername());
         UserDtoResponse response = userService.createUser(request);
         return ResponseEntity.ok(response);
-    }
+    }*/
 
     @PutMapping("/{id}/put")
-    public ResponseEntity<UserDtoResponse> putUser(@RequestBody RegisterUserRequest request, @PathVariable Long id) {
+    public ResponseEntity<UserDtoResponse> putUser(@RequestBody AuthRequest request, @PathVariable Long id) {
         log.info("Вызов метода updateUser с параметрами {} и {}", request, id);
         UserDtoResponse response = userService.putUser(request, id);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}/delete")
-    public ResponseEntity<UserDtoResponse> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<UserDtoResponse> deleteUser(@PathVariable("id") Long id) {
         log.info("Вызов метода deleteUser с параметром {}", id);
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();

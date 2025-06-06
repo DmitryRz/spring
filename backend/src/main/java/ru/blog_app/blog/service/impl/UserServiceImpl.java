@@ -1,10 +1,9 @@
 package ru.blog_app.blog.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.cglib.core.Local;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.blog_app.blog.dto.request.RegisterUserRequest;
+import ru.blog_app.blog.dto.request.AuthRequest;
 import ru.blog_app.blog.dto.response.UserDtoResponse;
 import ru.blog_app.blog.enums.Role;
 import ru.blog_app.blog.exception.UserAlreadyExistsException;
@@ -30,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDtoResponse createUser(RegisterUserRequest request) {
+    public UserDtoResponse createUser(AuthRequest request) {
         if(!userRepository.existsByUsername(request.getUsername()) &&
                 !userRepository.existsByEmail(request.getEmail())) {
 
@@ -49,7 +48,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDtoResponse putUser(RegisterUserRequest request, Long id) {
+    public UserDtoResponse putUser(AuthRequest request, Long id) {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new UserNotFoundException("User not found")
         );

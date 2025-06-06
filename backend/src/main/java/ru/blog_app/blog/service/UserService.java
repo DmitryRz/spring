@@ -1,6 +1,6 @@
 package ru.blog_app.blog.service;
 
-import ru.blog_app.blog.dto.request.RegisterUserRequest;
+import ru.blog_app.blog.dto.request.AuthRequest;
 import ru.blog_app.blog.dto.response.UserDtoResponse;
 
 /**
@@ -22,16 +22,16 @@ public interface UserService {
      * @param request данные для создания пользователя
      * @return информация о созданном пользователе
      */
-    UserDtoResponse createUser(RegisterUserRequest request);
+    UserDtoResponse createUser(AuthRequest request);
 
     /**
      * Обновляет информацию о пользователе на основе предоставленных данных.
      *
      * @param request данные для обновления пользователя
      * @param id идентификатор пользователя
-     * @return информация о обновленном пользователе
+     * @return информация об обновленном пользователе
      */
-    UserDtoResponse putUser(RegisterUserRequest request, Long id);
+    UserDtoResponse putUser(AuthRequest request, Long id);
 
     /**
      * Удаляет пользователя по его идентификатору.
