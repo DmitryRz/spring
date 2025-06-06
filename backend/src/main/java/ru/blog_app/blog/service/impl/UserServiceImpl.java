@@ -29,36 +29,17 @@ public class UserServiceImpl implements UserService {
         return createUserDtoResponse(user);
     }
 
-    @Override
-    public UserDtoResponse createUser(AuthRequest request) {
-        if(!userRepository.existsByUsername(request.getUsername()) &&
-                !userRepository.existsByEmail(request.getEmail())) {
-
-            User user = User.builder()
-                    .username(request.getUsername())
-                    .password(passwordEncoder.encode(request.getPassword()))
-                    .email(request.getEmail())
-                    .role(Role.USER)
-                    .createdAt(LocalDateTime.now())
-                    .build();
-
-            userRepository.save(user);
-            return createUserDtoResponse(user);
-        }
-        throw new UserAlreadyExistsException("User already exists");
-    }
-
-    @Override
-    public UserDtoResponse putUser(AuthRequest request, Long id, String currentUsername) {
-        User user = userRepository.findById(id).orElseThrow(
-                () -> new UserNotFoundException("User not found")
-        );
-        user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
-        user.setEmail(request.getEmail());
-        userRepository.save(user);
-        return createUserDtoResponse(user);
-    }
+//    @Override
+//    public UserDtoResponse putUser(AuthRequest request, Long id, String currentUsername) {
+//        User user = userRepository.findById(id).orElseThrow(
+//                () -> new UserNotFoundException("User not found")
+//        );
+//        user.setUsername(request.getUsername());
+//        user.setPassword(request.getPassword());
+//        user.setEmail(request.getEmail());
+//        userRepository.save(user);
+//        return createUserDtoResponse(user);
+//    }
 
     @Override
     public void deleteUser(Long id, String currentUsername) {

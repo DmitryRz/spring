@@ -12,31 +12,15 @@ public interface UserService {
      * Получает информацию о пользователе по его идентификатору.
      *
      * @param id идентификатор пользователя
-     * @return информация о пользователе
+     * @return информация о пользователе в формате UserDtoResponse
      */
     UserDtoResponse getUser(Long id);
 
     /**
-     * Создает нового пользователя на основе предоставленных данных.
-     *
-     * @param request данные для создания пользователя
-     * @return информация о созданном пользователе
-     */
-    UserDtoResponse createUser(AuthRequest request);
-
-    /**
-     * Обновляет информацию о пользователе на основе предоставленных данных.
-     *
-     * @param request данные для обновления пользователя
-     * @param id идентификатор пользователя
-     * @return информация об обновленном пользователе
-     */
-    UserDtoResponse putUser(AuthRequest request, Long id, String currentUsername);
-
-    /**
-     * Удаляет пользователя по его идентификатору.
+     * Удаляет пользователя по его идентификатору и имени текущего пользователя.
      *
      * @param id идентификатор пользователя
+     * @param currentUsername имя текущего пользователя
      */
     void deleteUser(Long id, String currentUsername);
 }
